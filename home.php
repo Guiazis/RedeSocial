@@ -13,10 +13,11 @@
 		$id = $_SESSION['id'];
 		$unome = $_SESSION['usuario'];
 		$nome = mysqli_query ($conexao,"SELECT * FROM cadastro
-				WHERE id = $id");
-		$linha = mysqli_fetch_array($nome);
-		$name=$linha["nome"];
-		$sname = $linha["sobrenome"];
+				WHERE email = '$id'");
+		$nome = mysqli_fetch_array($nome);
+		$name= $nome["nome"];
+		$sname = $nome["sobrenome"];
+		
 	}
 	
 
@@ -61,6 +62,7 @@
 	</head>
 	<body>
 		<?php
+		echo $name;
 		if(isset($_SESSION['usuario'])){
 		?>
 		<img src="./usuarios/<?php echo $unome; ?>/painel.jpg" class="capa"/>

@@ -1,51 +1,81 @@
 <?php
 		if($_SERVER['REQUEST_METHOD']=='POST'){
-			$c = false;
-			$nome = $_POST['nome'];   
-			$snome = $_POST['snome'];
-			$email = $_POST['email'];
-			$cemail = $_POST['cemail'];
-			$username = $_POST['usernome'];
-			$pass = $_POST['senha'];
-			$cpass = $_POST['csenha'];
-			$sexo = $_POST['sexo'];
-			$data = $_POST['data'];
+			$flag = array();
+			//$flag = false;
+			$nome = trim($_POST['nome']);
+			$snome = trim($_POST['snome']);
+			$email = trim($_POST['email']);
+			$cemail = trim($_POST['cemail']);
+			$username = trim($_POST['usernome']);
+			$pass = trim($_POST['senha']);
+			$cpass = trim($_POST['csenha']);
+			$data = trim($_POST['data']);
+
 			$servidor = "localhost";
 			$usuario = "root";
 			$senha = "";
 			$bddnome = "cadastros";
-			header('Content-Type: text/html, charset-utf-8');
+
+			// Conexão MySQL e confirmação
 			$conexao = mysqli_connect($servidor,$usuario,$senha,$bddnome);
-			
 			if(!$conexao){
 				echo "Sem conexao";
 			}
+
+			// Verficação de nome
+			if ($nome == ''){
+				$flag[0] = "true";
+			}
+			if ($snome == ""){
+				$flag[1] = 'true';
+			}
+			if (filter_var($email,FILTER_VALIDATE_EMAIL) == false){
+				$flag[2] = 'true';
+			}
+			if (filter_var($cemail,FILTER_VALIDATE_EMAIL) == false){
+				$flag[3] = 'true';
+			}
+			if ($pass == '' and strlen($pass) >= 5 and strlen($pass) <= 20){
+				$flag[5] = 'true';
+			}
+			if ($cpass == '' and strlen($pass) >= 5 and strlen($pass) <= 20) {
+				$flag[6] = 'true';
+			}
+			if (isset($_POST['sexo'])){
+				$sexo = $_POST['sexo'];
+				} else {
+				$flag[7] = "true";
+			}
+
+
+			// Verificação de senha e email, verficação de banco
 			if($pass == $cpass && $email == $cemail){
 				$select = mysqli_query ($conexao,'SELECT * FROM cadastro');
-			
-		
-			
 				while($linha = mysqli_fetch_array($select)){
 					if($linha["usernome"] == $username){
-						$c = true;
+						$flag[4] = "true";
 						break;
 					}
 				}
+				// Sem erro
 				if($c==false){
-					$select = mysqli_query ($conexao,'SELECT max(id) FROM cadastro');
 					$linha = mysqli_fetch_array($select);
-					$novoId = $linha["max(id)"]+1;
 					$pass = hash("sha512",$pass);
-					var_dump(mysqli_query($conexao, "INSERT INTO cadastro(id,nome,sobrenome,usernome,senha,email,sexo) VALUES ($novoId,'$nome','$snome','$username','$pass','$email','$sexo')"));
-					header ("Location: login.php");
+					$sql ="INSERT INTO cadastro(nome,sobrenome,usernome,senha,email,sexo) VALUES ('$nome','$snome','$username','$pass','$email','$sexo')";
+					if(mysqli_query($conexao, $sql)){
+						header ("Location: login.php");
+					}
+					else{
+						echo "Erro";
+					}
 				}
 				else{
-					echo "Usuário '". $username ."' já existe";
+					echo "Usuario '". $username ."' ja existe";
 				}
 			}
 			else{
-				echo "Confirmação de email ou senha incorreta";
+				echo "Confirmacao de email ou senha incorreta";
 			}
-			
+
 		}
 	?>

@@ -1,7 +1,7 @@
-<!doctype html>  
+<!doctype html>
 <html>
 	<head>
-		<meta charset="utf-8"/>	
+		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="./css/login.css"/>
 		<link href="https://fonts.googleapis.com/css?family=Quicksand|Raleway" rel="stylesheet">
 		<script src="./js/jquery.min.js"></script>
@@ -12,14 +12,14 @@
 			$c = false;
 			$username=$_POST['usernome'];
 			$passw=$_POST['senha'];
-			
+
 			$usuario = "root";
 			$senha = "";
 			$servidor = "localhost";
 			$bddnome = "cadastros";
 			header('Content-Type: text/html, charset-utf-8');
 			$conexao = mysqli_connect($servidor,$usuario,$senha,$bddnome);
-			
+
 			if(!$conexao){
 				echo "Sem conexao";
 			}
@@ -28,7 +28,7 @@
 				while($linha = mysqli_fetch_array($select)){
 					if($linha["usernome"] == $username && $linha["senha"] == $passw){
 						$c = true;
-						$id = $linha["id"];
+						$id = $linha["email"];
 						$username = $linha["usernome"];
 						break;
 					}
@@ -52,17 +52,17 @@
 				else{
 					header ("Location: erro.php");
 				}
-				
+
 		}
 	?>
 		<h1> Entrar </h1>
-		
+
 		<?php
 			session_start();
 			if(!isset($_SESSION['usuario'])){
 		?>
 		<div class="login">
-		
+
 				<form method="post" action="login.php">
 					<input name='usernome' placeholder="Username" type="text"/><br/>
 					<input name= 'senha' placeholder="Senha" type="password"/><br/>
@@ -71,7 +71,7 @@
 				<div class="botao">
 					<a class="entrar-cadastrar"  href="cadastrar.php"> Cadastre-se </a>
 				</div>
-			
+
 		</div>
 		<?php
 		}
