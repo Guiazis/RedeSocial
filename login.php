@@ -14,7 +14,7 @@
 			$passw=$_POST['senha'];
 
 			$usuario = "root";
-			$senha = "";
+			$senha = "guilherme123";
 			$servidor = "localhost";
 			$bddnome = "cadastros";
 			header('Content-Type: text/html, charset-utf-8');
@@ -23,7 +23,7 @@
 			if(!$conexao){
 				echo "Sem conexao";
 			}
-			$select = mysqli_query ($conexao,'SELECT * FROM cadastro');
+			$select = mysqli_query ($conexao,'SELECT * FROM usuarios');
 			$passw = hash("sha512",$passw);
 				while($linha = mysqli_fetch_array($select)){
 					if($linha["usernome"] == $username && $linha["senha"] == $passw){
@@ -35,7 +35,7 @@
 				}
 				if($c == true){
 					if(isset($_SESSION['usuario'])){
-						session_destroy();
+						//session_destroy();
 						session_start();
 						$_SESSION['id'] = $id;
 						$_SESSION['usuario'] = $username;
@@ -52,7 +52,6 @@
 				else{
 					header ("Location: erro.php");
 				}
-
 		}
 	?>
 		<h1> Entrar </h1>
@@ -78,9 +77,6 @@
 		else{
 			$usuario = $_SESSION['usuario'];
 			echo "Você já está cadastrado como $usuario <br/>";
-		?>
-			<a class="back_perfil" href="home.php">Ir para o perfil</a>
-		<?php
 		}
 		?>
 	</body>

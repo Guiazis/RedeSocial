@@ -1,11 +1,11 @@
-<!doctype html>  
+<!doctype html>
 <html>
 	<head>
-		<meta charset="utf-8"/>	
+		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="./css/cadastrar.css"/>
 		<link href="https://fonts.googleapis.com/css?family=Quicksand|Raleway" rel="stylesheet">
 		<script src="./js/jquery.min.js"></script>
-		
+
 	</head>
 	<body>
 		<h1> Cadastrar </h1>
@@ -20,8 +20,7 @@
 				<input name="csenha" placeholder="Confirmação de senha" type="password" maxlength="20" required/><br/>
 				Masculino<input type="radio" name="sexo" value="M" required><br/>
 				Feminino<input type="radio" name="sexo" value="F" required> <br/>
-				Outro<br/><input type="radio" name="sexo" value="O" required> <br/>
-				<input name="data" placeholder="Data de nascimento" type="date"/><br/>
+				Outro<input type="radio" name="sexo" value="O" required> <br/>
 				<input class="sub" type="submit" value="Cadastrar"/><br/>
 				<a class="entrar-cadastrar" href="login.php"> Entrar </a>
 			</form>

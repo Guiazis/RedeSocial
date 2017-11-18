@@ -13,7 +13,7 @@
 
 			$servidor = "localhost";
 			$usuario = "root";
-			$senha = "";
+			$senha = "guilherme123";
 			$bddnome = "cadastros";
 
 			// Conexão MySQL e confirmação
@@ -50,7 +50,7 @@
 
 			// Verificação de senha e email, verficação de banco
 			if($pass == $cpass && $email == $cemail){
-				$select = mysqli_query ($conexao,'SELECT * FROM cadastro');
+				$select = mysqli_query ($conexao,'SELECT * FROM usuarios');
 				while($linha = mysqli_fetch_array($select)){
 					if($linha["usernome"] == $username){
 						$flag[4] = "true";
@@ -58,15 +58,18 @@
 					}
 				}
 				// Sem erro
-				if($c==false){
+				if($c == false){
 					$linha = mysqli_fetch_array($select);
 					$pass = hash("sha512",$pass);
-					$sql ="INSERT INTO cadastro(nome,sobrenome,usernome,senha,email,sexo) VALUES ('$nome','$snome','$username','$pass','$email','$sexo')";
+					$sql ="INSERT INTO usuarios(email,nome,sobrenome,usernome,senha,sexo) VALUES ('$email','$nome','$snome','$username','$pass','$sexo')";
 					if(mysqli_query($conexao, $sql)){
-						header ("Location: login.php");
+						header ("Location: home.php");
 					}
+					// Direciona para acessar a página
 					else{
-						echo "Erro";
+						echo "Erro!";?><br><?php
+						echo "Conta já está cadastrada!";
+						header ("Location: login.php");
 					}
 				}
 				else{
