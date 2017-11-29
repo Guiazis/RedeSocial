@@ -2,11 +2,11 @@
 <html lang = "pt-br">
 	<head>
 		<meta charset="utf-8"/>
-		<!--<link rel="stylesheet" type="text/css" href="./css/default.css" />-->
-		<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+		<link href="file:///var/www/html/socializer/fonte/indieflower-demo.html" rel="font"/>
 		<link rel="stylesheet" type="text/css" href="./css/default.css" />
 		<link href="./css/hexaflip.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="./css/index.css">
+		<title>Socializer</title>
 		<script src="./js/jquery.js"></script>
 		<script>
 		</script>
@@ -25,7 +25,7 @@
 						<h1>Coloque o código. <span>O código é "Azul, Vermelho, Violeta e Cinza"</span></h1>
 				</header>
 				<div class="main">
-						<div id="hexaflip-demo5" class="demo"></div>
+						<div id="hexaflip-demo5" class="demo" style="margin-bottom: 20px;"></div>
 						<div>
 								<span id="submit">Testar código</span>
 								<div id="output"></div>

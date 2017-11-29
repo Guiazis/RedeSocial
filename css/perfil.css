@@ -14,6 +14,7 @@ h1{
 	border-bottom: 1px solid #bdbdbd;
 }
 
+
 .perfil{
 	top: 170px;
 	left: 50%;
@@ -21,4 +22,9 @@ h1{
 	width: 150px;
 	height: 150px;
 	border: 1px solid #bdbdbd;
+}
+
+form{
+	float: left;
+	display: inline;
 }

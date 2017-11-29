@@ -9,27 +9,20 @@
 	<body>
 	<?php
 		if($_SERVER['REQUEST_METHOD']=="POST"){
-			$c = false;
-			$username=$_POST['usernome'];
-			$passw=$_POST['senha'];
 
-			$usuario = "root";
-			$senha = "guilherme123";
-			$servidor = "localhost";
-			$bddnome = "cadastros";
-			header('Content-Type: text/html, charset-utf-8');
-			$conexao = mysqli_connect($servidor,$usuario,$senha,$bddnome);
+			$username = $_POST['user'];
+			$email = $_POST['email'];
+			$passw = $_POST['senha'];
 
-			if(!$conexao){
-				echo "Sem conexao";
-			}
-			$select = mysqli_query ($conexao,'SELECT * FROM usuarios');
+			include("db.php");
+		// Verificação para certificar que o usuario está cadastrado
+			$select = mysqli_query ($conexao,'SELECT * FROM usuario');
 			$passw = hash("sha512",$passw);
 				while($linha = mysqli_fetch_array($select)){
-					if($linha["usernome"] == $username && $linha["senha"] == $passw){
+					if($linha["email"] == $username || $linha["user"] == $username && $linha["senha"] == $passw){
 						$c = true;
 						$id = $linha["email"];
-						$username = $linha["usernome"];
+						$username = $linha["user"];
 						break;
 					}
 				}
@@ -46,11 +39,14 @@
 						session_start();
 						$_SESSION['id'] = $id;
 						$_SESSION['usuario'] = $username;
-						header ("Location: home.php");
+						$iduser = $linha['id'];
+						header ("Location: home.php?$iduser");
+						exit();
 					}
 				}
 				else{
 					header ("Location: erro.php");
+					exit();
 				}
 		}
 	?>
@@ -62,10 +58,10 @@
 		?>
 		<div class="login">
 
-				<form method="post" action="login.php">
-					<input name='usernome' placeholder="Username" type="text"/><br/>
+				<form method="post">
+					<input name='user' placeholder="Email/User" type="text"/><br/>
 					<input name= 'senha' placeholder="Senha" type="password"/><br/>
-					<input class="sub" type="submit" id="entrar" value="Entrar"/><br/>
+					<input class="sub" type="submit" name="Entrar" id="entrar"/><br/>
 				</form>
 				<div class="botao">
 					<a class="entrar-cadastrar"  href="cadastrar.php"> Cadastre-se </a>

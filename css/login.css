@@ -2,7 +2,7 @@ body{
 	background-image: url("backlogin.jpg");
 	background-repeat: no-repeat;
 	background-size: 100%;
-	
+
 }
 
 h1{
@@ -54,7 +54,7 @@ input{
 	filter: brightness(80%);
 }
 
-a{
+.entrar-cadastrar{
 	font-size: 1.2em;
 	color: #fff;
 	text-decoration: none;

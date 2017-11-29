@@ -1,7 +1,7 @@
 body{
 	background-image: url("backlogin.jpg");
 	background-repeat: no-repeat;
-	background-size: 100%;	
+	background-size: 100%;
 }
 
 h1{
@@ -36,7 +36,7 @@ input{
 	margin-bottom: 5px;
 }
 
-a{
+.botao{
 	font-size: 1.2em;
 	color: #fff;
 	text-decoration: none;
