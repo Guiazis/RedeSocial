@@ -40,7 +40,7 @@
 						$_SESSION['id'] = $id;
 						$_SESSION['usuario'] = $username;
 						$iduser = $linha['id'];
-						header ("Location: home.php?$iduser");
+						header ("Location: home.php?id=".$iduser);
 						exit();
 					}
 				}

@@ -27,7 +27,6 @@ CREATE TABLE amizades (
   de varchar(100) NOT NULL,
   para varchar(100) NOT NULL,
   aceite varchar(3) NOT NULL DEFAULT 'nao',
-  data date NOT NULL,
   primary key (id)
 );
 

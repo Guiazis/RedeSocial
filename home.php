@@ -76,7 +76,7 @@
 						$(".amigos").css("display","none");
 					});
 					$(".add").click(function(){
-						$(this).text("ENVIANDO");
+						$(this).text("AGUARDANDO");
 					});
 				})
 			</script>
@@ -97,21 +97,21 @@
 				if($id == $_SESSION['id']){
 			?>
 				<button class="exibir_solicitacoes"> Solicitações </button>
-				<a href="people.php">Pesssoas</a>
+				<button href="people.php" class="people">Pesssoas</button>
 			<?php
 				}
 				else{
-					$getId= $_GET['user'];
+					$getId= $_GET['id'];
 					$id_logado = $_SESSION['id'];
 			?>
-				<a class="back" href="http://localhost/rede/home.php"> Voltar </a>
+				<a class="back" href="http://localhost/socializer/home.php?id=<?php echo $id ?>"> Voltar </a>
 			<?php
 				$selecao = mysqli_query ($conexao,"SELECT count(*) FROM amizades
 			WHERE de = $getId and para = $id_logado and aceite='sim' or aceite='nao' or de = $id_logado and para = $getId and aceite='sim' or aceite='nao'");
 					$linha = mysqli_fetch_array($selecao);
 					if($linha["count(*)"]==0){
 			?>
-				<a class="add" href="adicionar_aceitar.php?user=<?php echo $getId;?>"> Adicionar</a>
+				<a class="add" href="adicionar.php?user=<?php echo $getId;?>"> Adicionar</a>
 
 			<?php
 					}
@@ -129,8 +129,8 @@
 					<h3 class="titulo"> Amigos:</h3>
 				<?php
 					while($linha = mysqli_fetch_array($selecao)){
-						if($id == $linha["convite"]){
-							$convidado = $linha["convidado"];
+						if($id == $linha["de"]){
+							$convidado = $linha["para"];
 							$descobrir =  mysqli_query ($conexao,"SELECT * FROM usuario
 							WHERE id = $convidado");
 							$amigo = mysqli_fetch_array($descobrir);
@@ -139,13 +139,13 @@
 						<div class="friend">
 							<p  class="amigo_nome"><strong><?php echo $amigo["nome"]." ".$amigo["sobrenome"];?></strong></p>
 							<p  class="amigo_nome"> <?php echo $amigo["username"];?></p>
-							<a  href="http://localhost/rede/home.php?user=<?php echo $convidado ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convidado ?>"/></a>
-							<a  href="http://localhost/rede/home.php?user=<?php echo $convidado ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convidado ?>"/></a>
+							<a  href="http://localhost/socializer/home.php?user=<?php echo $convidado ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convidado ?>"/></a>
+							<a  href="http://localhost/socializer/home.php?user=<?php echo $convidado ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convidado ?>"/></a>
 						</div>
 					<?php
 						}
 						else{
-							$convite = $linha["convite"];
+							$convite = $linha["de"];
 							$descobrir =  mysqli_query ($conexao,"SELECT * FROM usuario
 							WHERE id = $convite");
 							$amigo = mysqli_fetch_array($descobrir);
@@ -153,8 +153,8 @@
 						<div class="friend">
 							<p  class="amigo_nome"><strong> <?php echo $amigo["nome"]." ".$amigo["sobrenome"];?></strong></p>
 							<p class="amigo_nome"> <?php echo $amigo["username"];?></p>
-							<a  href="http://localhost/rede/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convite ?>"/></a>
-							<a  href="http://localhost/rede/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convite ?>"/></a>
+							<a  href="http://localhost/socializer/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convite ?>"/></a>
+							<a  href="http://localhost/socializer/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convite ?>"/></a>
 						</div>
 					<?php
 						}
@@ -173,7 +173,7 @@
 				$selecao = mysqli_query ($conexao,"SELECT * FROM amizades
 					WHERE de = $id and aceite='aguardo'");
 					while($linha = mysqli_fetch_array($selecao)){
-						$convite = $linha["convite"];
+						$convite = $linha["de"];
 						$descobrir =  mysqli_query ($conexao,"SELECT * FROM usuario
 						WHERE id = $convite");
 						$amigo = mysqli_fetch_array($descobrir);
@@ -181,9 +181,9 @@
 					<div class="friend">
 						<p class="amigo_nome"><strong><?php echo $amigo["nome"]." ".$amigo["sobrenome"];?></strong></p>
 						<p class="amigo_nome"><?php echo $amigo["username"];?></p>
-						<a  href="http://localhost/rede/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convite ?>"/></a>
-						<a  href="http://localhost/rede/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convite ?>"/></a>
-						<a class="aceitar" href="http://localhost/rede/aceitar.php?user=<?php echo $amigo['id'] ?>"> Aceitar</a>
+						<a  href="http://localhost/socializer/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/painel.jpg" class="amigo_painel" id="<?php echo $convite ?>"/></a>
+						<a  href="http://localhost/socializer/home.php?user=<?php echo $convite ?>"><img src="./usuarios/<?php echo $amigo["username"]?>/perfil.jpg" class="amigo_perfil" id="<?php echo $convite ?>"/></a>
+						<a class="aceitar" href="http://localhost/socializer/aceitar.php?user=<?php echo $amigo['id'] ?>"> Aceitar</a>
 					</div>
 					<?php
 					}
