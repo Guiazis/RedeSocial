@@ -81,13 +81,13 @@
 				})
 			</script>
 		</head>
-		<body>
+		<body style="background-image: none;">
 			<?php
+			include("barra.php");
 			if(isset($_SESSION['usuario'])){
 			?>
 
-			<img src="./usuarios/<?php echo $unome?>/painel.jpg" class="painel"/>
-			<a id="signout" href="logout.php">Log Out</a>
+			<img class="capa" src="./usuarios/<?php echo $unome?>/painel.jpg" style="height: 350px; width: 100%;"/>
 			<div class="info">
 				<img src="./usuarios/<?php echo $unome?>/perfil.jpg" class="perfil"/>
 				<h1 class="nome"> <?php echo $name." ". $sname?></h1>
@@ -97,7 +97,7 @@
 				if($id == $_SESSION['id']){
 			?>
 				<button class="exibir_solicitacoes"> Solicitações </button>
-				<button href="people.php" class="people">Pesssoas</button>
+				<a class="people" href="people.php">Pesssoas</a>
 			<?php
 				}
 				else{
@@ -192,7 +192,7 @@
 			<?php
 
 			?>
-				<button class="aparecer"> Trocar imagens </button>
+				<button class="aparecer" style="top:350px;"> Trocar imagens </button>
 				<form action="home.php" method="post" enctype="multipart/form-data" class="fotos exc">
 					Escolha a foto de perfil<input name="perfil" type="file" value="Escolha a foto de perfil" class="exc"/><br>
 					Escolha o painel<input name="painel" type="file" value="Escolha a foto de painel" class="exc"/><br>

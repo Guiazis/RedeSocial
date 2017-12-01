@@ -11,23 +11,15 @@ create table usuario (
     sexo varchar (2),
 	primary key (email)
 );
-/*
-CREATE TABLE `usuario` (
-  codigo int(11) NOT NULL,
-  email varchar(100) NOT NULL,
-  senha varchar(30) NOT NULL,
-  nome varchar(50) NOT NULL,
-  data_nascimento date DEFAULT NULL,
-  foto text,
-  descricao varchar(250) DEFAULT NULL
-);*/
 
 CREATE TABLE amizades (
   id int(11) NOT NULL,
   de varchar(100) NOT NULL,
   para varchar(100) NOT NULL,
-  aceite varchar(3) NOT NULL DEFAULT 'nao',
+  status varchar(20) not null,
   primary key (id)
+  /*foreign key(de) references usuario (id),
+  foreign key(para) references usuario (id)*/
 );
 
 CREATE TABLE mensagens (
@@ -40,6 +32,7 @@ CREATE TABLE mensagens (
   status int(11) NOT NULL DEFAULT '0',
   primary key (id)
 );
+
     
 select * from amizades;
 select * from mensagens;
